@@ -12,7 +12,7 @@ const Home = () => {
 					type="text"
 					onChange={(e) => setInputValue(e.target.value)}
 					value={InputValue}
-					onKeyPress={(e) => {
+					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							setToDo(ToDo.concat(InputValue));
 							setInputValue("");

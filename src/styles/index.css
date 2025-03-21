@@ -29,3 +29,20 @@ input{
     border: none;
     width: 100%;
 }
+.container {
+    background-color: lightgray;
+    margin: auto;
+    width: 500px;
+    height: auto;
+    border-radius: 5px;
+}
+span {
+    color: red;
+    position: relative;
+    float: right;
+
+}
+
+.item {
+    font-size: small;
+}

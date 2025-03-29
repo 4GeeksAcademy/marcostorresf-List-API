@@ -11,6 +11,32 @@ const Home = () => {
 
 	},[])
 
+	// useEffect(() => {}, [ToDo])
+
+	const addToList = async (e) => {
+		e.preventDefault();
+		let ToDo = {label: InputValue, is_done: false}
+		let response = await fetch('https://playground.4geeks.com/todo/todos/marcostorresf', {
+			method: "POST",
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(ToDo)
+		})
+        let data = await response.json()
+		getUser()
+		setUserInput("")
+	
+	};
+
+	
+	const removeToDo = async (X) =>{
+
+		let deleteResponse = await fetch(`https://playground.4geeks.com/todo/todos/${X}`, {
+			method: "DELETE",
+			headers: { "Content-type": "application/json" },
+		})
+
+	};
+
 	const getUser = async() => {
 		let response = await fetch('https://playground.4geeks.com/todo/users/marcostorresf')
         let data = await response.json()
@@ -19,7 +45,7 @@ const Home = () => {
 			setToDo(data.todos)
 			console.log(data.name)
 		}
-		else if(typeof data.name !='undefined'){
+		else {
 			let response = await fetch('https://playground.4geeks.com/todo/users/marcostorresf',{
 				method: "POST",
                 headers: { "Content-type": "application/json" },
@@ -41,15 +67,15 @@ const Home = () => {
 					value={InputValue}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
-							setToDo(ToDo.concat(InputValue));
-							setInputValue("");
+							addToList(e)
+							
 						}
 					}}
 					placeholder="What do you need to do?"></input>
 				</li>
 				{ToDo.map((item, index) => (
 					<li>
-						{item.label}{" "} <span className="" onClick={() => setToDo(ToDo.filter((t, currentIndex) => index != currentIndex))}>X</span>
+						{item.label}{" "} <span className="" onClick={() => removeToDo(item.id)}>X</span>
 					</li>
 
 

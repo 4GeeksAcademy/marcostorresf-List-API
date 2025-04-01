@@ -23,7 +23,7 @@ const Home = () => {
 		})
         let data = await response.json()
 		getUser()
-		setUserInput("")
+		setInputValue("")
 	
 	};
 
@@ -34,6 +34,7 @@ const Home = () => {
 			method: "DELETE",
 			headers: { "Content-type": "application/json" },
 		})
+		getUser()
 
 	};
 
@@ -72,7 +73,7 @@ const Home = () => {
 						}
 					}}
 					placeholder="What do you need to do?"></input>
-				</li>
+				</li> 
 				{ToDo.map((item, index) => (
 					<li>
 						{item.label}{" "} <span className="" onClick={() => removeToDo(item.id)}>X</span>
